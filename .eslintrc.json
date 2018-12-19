@@ -1,0 +1,49 @@
+{
+    "extends": [
+        "airbnb",
+        "plugin:react/recommended",
+        "plugin:import/recommended",
+        "plugin:jsx-a11y/recommended"
+    ],
+    "rules": {
+        "indent": ["error", 4, {"SwitchCase": 1}],
+        "eslint-disable-line": "no-use-before-define",
+        "max-len": [1, 120, 4],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "no-shadow": "off",
+        "class-methods-use-this": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/require-default-props": [0],
+        "react/no-array-index-key": [0],
+        "eol-last": ["error", "always"],
+        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "react/jsx-one-expression-per-line": ["error", { "allow": "single-child" }],
+        "jsx-a11y/click-events-have-key-events": [0],
+        "object-curly-newline": ["error", {
+            "ObjectExpression": { "consistent": true },
+            "ObjectPattern": { "multiline": true },
+            "ImportDeclaration": "never",
+            "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+        }],
+        "no-plusplus": [0],
+        "no-use-before-define": ["error", { "functions": false }],
+        "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }]
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "jest",
+        "import"
+    ],
+    "env": {
+        "browser": true,
+        "jest/globals": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 9,
+        "sourceType": "module"
+    },
+    "globals": {"fetch": false}
+}
