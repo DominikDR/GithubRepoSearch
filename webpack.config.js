@@ -48,7 +48,6 @@ module.exports = {
                             modules: true,
                             localIdentName: '[name]_[local]_[hash:base64]',
                             sourceMap: true,
-                            minimize: true,
                             importLoaders: 1,
                         },
                     },
@@ -68,8 +67,8 @@ module.exports = {
                         },
                     },
                 ],
-            }
-        ]
+            },
+        ],
     },
     plugins: [
         htmlPlugin,
