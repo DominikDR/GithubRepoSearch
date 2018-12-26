@@ -11,17 +11,16 @@ export default class SearchBar extends React.PureComponent {
     handleSubmit = (event) => {
         const { searchedValue } = this.props;
         event.preventDefault();
-        console.log("event", this.textInput.current.value);
         searchedValue(this.textInput.current.value);
     }
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" className="input" ref={this.textInput} placeholder="Search" />
+            <div className={styles.searchBarContainer}>
+                <form className={styles.searchForm} onSubmit={this.handleSubmit}>
+                    <input type="text" className={styles.searchInput} ref={this.textInput} placeholder="Search" />
                     <button type="submit" className={styles.searchButton}>
-                        <FontAwesomeIcon icon="search" />
+                        <FontAwesomeIcon className={styles.loupeIcon} icon="search" />
                     </button>
                 </form>
             </div>

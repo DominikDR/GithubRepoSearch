@@ -1,0 +1,56 @@
+.searchBarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f37c65;
+    height: 70px;
+    padding: 0px 5%;
+}
+
+.searchForm {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 40px;
+}
+
+.searchInput {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 50px;
+    border-radius: 20px;
+    border: 1px solid#d0baba;
+    outline: none;
+}
+.searchInput:focus {
+    box-shadow: 0 1px 6px 0 rgba(36, 32, 32, 0.35);
+}
+.searchInput:hover {
+    box-shadow: 0 1px 6px 0 rgba(36, 32, 32, 0.35);
+}
+
+.searchButton {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    right: 0px;
+    padding-left: 0;
+    padding-right: 15px;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.loupeIcon {
+    font-size: 30px;
+    background: transparent;
+    color: rgb(236, 200, 200);
+}

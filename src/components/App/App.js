@@ -21,13 +21,11 @@ export default class App extends React.Component {
 
     fetchRepos = async () => {
         const { searchedValue } = this.state;
-        console.log("value", searchedValue)
         const url = `https://api.github.com/search/repositories?q=${searchedValue}`;
         try {
             const response = await fetch(url, {
                 method: 'get',
             });
-            console.log('response', response.json());
             return response.json();
         } catch (error) {
             console.error(error);
@@ -36,7 +34,6 @@ export default class App extends React.Component {
     }
 
     handleSearch = (searchedValue) => {
-		console.log("​App -> handleSearch -> searchedValue", searchedValue)
         this.setState({
             searchedValue,
         });
@@ -44,7 +41,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={styles.mainPage}>
                 <SearchBar searchedValue={this.handleSearch} />
             </div>
         );

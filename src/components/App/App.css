@@ -1,0 +1,7 @@
+:global(body) {
+    margin: 0;
+}
+.mainPage {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
