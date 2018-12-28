@@ -1,12 +1,7 @@
 import React from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import RepositoryInfo from '../RepositoryInfo/RepositoryInfo';
-
-library.add(faSearch);
 
 export default class App extends React.Component {
     state = {
