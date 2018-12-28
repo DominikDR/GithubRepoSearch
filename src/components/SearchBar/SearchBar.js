@@ -9,9 +9,9 @@ export default class SearchBar extends React.PureComponent {
     }
 
     handleSubmit = (event) => {
-        const { searchedValue } = this.props;
+        const { onSearch } = this.props;
         event.preventDefault();
-        searchedValue(this.textInput.current.value);
+        onSearch(this.textInput.current.value);
     }
 
     render() {
