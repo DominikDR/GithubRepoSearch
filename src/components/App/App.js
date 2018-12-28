@@ -1,4 +1,7 @@
 import React from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import RepositoryInfo from '../RepositoryInfo/RepositoryInfo';
@@ -30,7 +33,6 @@ export default class App extends React.Component {
                 method: 'get',
             });
             const data = await response.json();
-            console.log('data', data);
             const partOfData = data.items.map((repo) => {
                 const pickedProperties = {
                     name: repo.name,
@@ -46,7 +48,6 @@ export default class App extends React.Component {
                 };
                 return pickedProperties;
             });
-            console.log('partOfData', partOfData);
             return partOfData;
         } catch (error) {
             console.error(error);
@@ -61,10 +62,11 @@ export default class App extends React.Component {
     }
 
     render() {
+        const { repositories } = this.state;
         return (
             <div className={styles.mainPage}>
                 <SearchBar onSearch={this.handleSearch} />
-                <RepositoryInfo repositories={this.state.repositories} />
+                <RepositoryInfo repositories={repositories} />
             </div>
         );
     }
