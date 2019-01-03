@@ -3,34 +3,37 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './RepositoryList.css';
 
-export default class RepositoryList extends React.PureComponent {
+export default class RepositoryList extends React.Component {
     state = {
         repositories: [],
     }
 
+    componentDidMount() {
+        this.fetchRepositories();
+    }
+
     componentDidUpdate(prevProps) {
         const { searchedRepository } = this.props;
-        if (searchedRepository !== prevProps.searchedRepository) {
-            this.fetchRepositories().then((data) => {
-                this.setState({
-                    repositories: this.reduceRepoData(data),
-                });
-            });
+        const { repositories } = this.state;
+        if (searchedRepository !== prevProps.searchedRepository || !repositories.length) {
+            this.fetchRepositories();
         }
     }
 
     fetchRepositories = async () => {
         const { searchedRepository } = this.props;
+        if (!searchedRepository) return;
         const url = `https://api.github.com/search/repositories?q=${searchedRepository}&page=1`;
         try {
             const response = await fetch(url, {
                 method: 'get',
             });
             const data = await response.json();
-            return data;
+            this.setState({
+                repositories: this.reduceRepoData(data),
+            });
         } catch (error) {
             console.error(error);
-            return error;
         }
     }
 
