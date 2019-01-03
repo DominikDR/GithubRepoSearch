@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FaSearch, FaGithub } from 'react-icons/fa';
 import styles from './SearchBar.css';
 
@@ -22,7 +23,7 @@ export default class SearchBar extends React.PureComponent {
                     <span className={styles.title}>Search for any Github repository</span>
                 </header>
                 <form className={styles.searchForm} onSubmit={this.handleSubmit}>
-                    <input type="text" className={styles.searchInput} ref={this.textInput} placeholder="Type here" />
+                    <input type="text" value="weatherapp" className={styles.searchInput} ref={this.textInput} placeholder="Type here" />
                     <button type="submit" className={styles.searchButton}>
                         <FaSearch className={styles.loupeIcon} />
                     </button>
@@ -31,3 +32,7 @@ export default class SearchBar extends React.PureComponent {
         );
     }
 }
+
+SearchBar.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+};

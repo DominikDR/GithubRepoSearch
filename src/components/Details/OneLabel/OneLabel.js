@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './OneLabel.css';
 
 const OneLabel = ({ text, value }) => (
@@ -9,3 +10,11 @@ const OneLabel = ({ text, value }) => (
 );
 
 export default OneLabel;
+
+OneLabel.propTypes = {
+    text: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
+};

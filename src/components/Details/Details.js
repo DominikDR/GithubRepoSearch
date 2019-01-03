@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Details.css';
 import OneLabel from './OneLabel/OneLabel';
 
@@ -72,3 +73,11 @@ export default class Details extends React.PureComponent {
         );
     }
 }
+
+Details.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.node,
+        }).isRequired,
+    }).isRequired,
+};
