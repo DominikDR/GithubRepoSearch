@@ -1,0 +1,16 @@
+.detailsContainer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 25px;
+}
+
+.title {
+    display: grid;
+    grid-template-columns: 150px 6fr;
+    grid-gap: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: right;
+    color: #3b3b3b;
+}
