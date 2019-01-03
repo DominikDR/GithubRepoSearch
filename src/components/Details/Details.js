@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Details.css';
-import OneLabel from './OneLabel/OneLabel';
+import Description from './Description/Description';
 
 export default class Details extends React.PureComponent {
     state = {
@@ -47,15 +48,15 @@ export default class Details extends React.PureComponent {
 
     renderDetails = (object) => {
         const details = Object.entries(object)
-            .map(([description, value], index) => {
-                if (description === 'repoUrl') {
+            .map(([label, value], index) => {
+                if (label === 'repoUrl') {
                     // eslint-disable-next-line no-param-reassign
-                    description = description.replace('repoUrl', 'Visit on Github');
+                    label = label.replace('repoUrl', 'Visit on Github');
                 }
                 return (
-                    <OneLabel
+                    <Description
                         key={index}
-                        text={description}
+                        text={label}
                         value={value}
                     />
                 );
@@ -72,3 +73,11 @@ export default class Details extends React.PureComponent {
         );
     }
 }
+
+Details.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.node,
+        }).isRequired,
+    }).isRequired,
+};

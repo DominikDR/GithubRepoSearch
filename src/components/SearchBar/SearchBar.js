@@ -1,16 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { FaSearch, FaGithub } from 'react-icons/fa';
 import styles from './SearchBar.css';
 
-export default class SearchBar extends React.PureComponent {
+class SearchBar extends React.PureComponent {
     constructor(props) {
         super(props);
         this.textInput = React.createRef();
     }
 
     handleSubmit = (event) => {
-        const { onSearch } = this.props;
+        const { onSearch, history } = this.props;
         event.preventDefault();
+        history.push('/');
         onSearch(this.textInput.current.value);
     }
 
@@ -31,3 +34,13 @@ export default class SearchBar extends React.PureComponent {
         );
     }
 }
+
+SearchBar.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+    history: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.func,
+    ]),
+};
+
+export default withRouter(SearchBar);

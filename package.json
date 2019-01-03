@@ -33,14 +33,15 @@
     "style-loader": "^0.23.0",
     "webpack": "^4.20.1",
     "webpack-cli": "^3.1.1"
-  },
-  "dependencies": {
+},
+"dependencies": {
     "classnames": "^2.2.6",
     "express": "^4.16.3",
     "npm": "^6.5.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1",
     "react-icons": "^3.2.2"
   }
 }

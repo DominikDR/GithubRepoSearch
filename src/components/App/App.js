@@ -1,67 +1,33 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import styles from './App.css';
 import SearchBar from '../SearchBar/SearchBar';
-import RepositoryInfo from '../RepositoryInfo/RepositoryInfo';
+import RepositoryList from '../RepositoryList/RepositoryList';
+import Details from '../Details/Details';
 
 export default class App extends React.Component {
     state = {
-        onSearch: '',
-        repositories: [],
+        searchedRepository: '',
     };
 
-    componentDidUpdate(prevProps, prevState) {
-        const { onSearch } = this.state;
-        if (onSearch !== prevState.onSearch) {
-            this.fetchRepos().then((data) => {
-                this.setState({
-                    repositories: data,
-                });
-            });
-        }
-    }
-
-    fetchRepos = async () => {
-        const { onSearch } = this.state;
-        const url = `https://api.github.com/search/repositories?q=${onSearch}&page=1`;
-        try {
-            const response = await fetch(url, {
-                method: 'get',
-            });
-            const data = await response.json();
-            const partOfData = data.items.map((repo) => {
-                const pickedProperties = {
-                    name: repo.name,
-                    login: repo.owner.login,
-                    stars: repo.stargazers_count,
-                    language: repo.language,
-                    details: {
-                        description: repo.description,
-                        created: repo.created_at,
-                        forksCount: repo.forks_count,
-                        repoUrl: repo.svn_url,
-                    },
-                };
-                return pickedProperties;
-            });
-            return partOfData;
-        } catch (error) {
-            console.error(error);
-            return error;
-        }
-    }
-
-    handleSearch = (onSearch) => {
+    handleSearch = (searchedRepository) => {
         this.setState({
-            onSearch,
+            searchedRepository,
         });
     }
 
     render() {
-        const { repositories } = this.state;
+        const { searchedRepository } = this.state;
         return (
             <div className={styles.mainPage}>
                 <SearchBar onSearch={this.handleSearch} />
-                <RepositoryInfo repositories={repositories} />
+                <Switch>
+                    <Route
+                        exact path="/" // eslint-disable-line react/jsx-max-props-per-line
+                        render={() => <RepositoryList searchedRepository={searchedRepository} />}
+                    />
+                    <Route path="/details/:owner/:repoName" component={Details} />
+                </Switch>
             </div>
         );
     }
