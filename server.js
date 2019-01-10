@@ -1,16 +1,19 @@
 const Express = require('express');
+const http = require('http');
+const path = require('path');
 
 const hostname = 'localhost';
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = new Express();
+const server = new http.Server(app);
 
 app.get('/', (req, res) => {
-    res.sendFile(`${__dirname}/dist/index.html`);
+    res.sendFile(path.resolve(`${__dirname}/dist/index.html`));
 });
 
 app.use(Express.static('dist'));
 
-app.listen(port, hostname, (err) => {
+server.listen(port, (err) => {
     if (err) {
         console.error(err);
     } else {
