@@ -2,12 +2,15 @@
   "name": "githubreposearch",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://dominikdr.github.io/GithubRepoSearch",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "build": "webpack --mode development",
     "build:watch": "webpack --mode development --watch",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "predeploy": "rm -rf dist && webpack --mode development",
+    "deploy": "gh-pages -d dist"
   },
   "author": "DR",
   "license": "ISC",
@@ -33,10 +36,11 @@
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.2.0",
     "style-loader": "^0.23.0",
+    "gh-pages": "^2.0.1",
     "webpack": "^4.20.1",
     "webpack-cli": "^3.1.1"
-},
-"dependencies": {
+  },
+  "dependencies": {
     "express": "^4.16.3",
     "npm": "^6.5.0",
     "prop-types": "^15.6.2",
