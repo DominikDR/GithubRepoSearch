@@ -5,25 +5,16 @@ import SearchBar from '../SearchBar/SearchBar';
 import RepositoryList from '../RepositoryList/RepositoryList';
 import Details from '../Details/Details';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class App extends React.Component {
-    state = {
-        searchedRepository: '',
-    };
-
-    handleSearch = (searchedRepository) => {
-        this.setState({
-            searchedRepository,
-        });
-    }
-
     render() {
         return (
             <div className={styles.mainPage}>
-                <SearchBar onSearch={this.handleSearch} />
+                <SearchBar />
                 <Switch>
                     <Route
                         exact path="/results" // eslint-disable-line react/jsx-max-props-per-line
-                        render={props => <RepositoryList searchedRepository={props} />}
+                        render={props => <RepositoryList {...props} />}
                     />
                     <Route path="/details/:owner/:repoName" component={Details} />
                 </Switch>

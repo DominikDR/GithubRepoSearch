@@ -9,12 +9,7 @@ export default class Details extends React.PureComponent {
     }
 
     componentDidMount() {
-        console.log("props", this.props)
-        this.fetchRepository().then((data) => {
-            this.setState({
-                repository: this.reduceRepoData(data),
-            });
-        });
+        this.fetchRepository();
     }
 
     fetchRepository = async () => {
@@ -25,10 +20,11 @@ export default class Details extends React.PureComponent {
                 method: 'get',
             });
             const data = await response.json();
-            return data;
+            this.setState({
+                repository: this.reduceRepoData(data),
+            });
         } catch (error) {
             console.error(error);
-            return error;
         }
     };
 

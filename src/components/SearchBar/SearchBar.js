@@ -11,15 +11,13 @@ class SearchBar extends React.PureComponent {
     }
 
     handleSubmit = (event) => {
-        const { onSearch, history } = this.props;
-		console.log("​SearchBar -> handleSubmit -> this.props", this.props)
+        const { history } = this.props;
         const searchedRepo = this.textInput.current.value;
         event.preventDefault();
         history.push({
             pathname: '/results',
             search: `?q=${searchedRepo}`,
         });
-        onSearch(searchedRepo);
     }
 
     render() {
@@ -41,7 +39,6 @@ class SearchBar extends React.PureComponent {
 }
 
 SearchBar.propTypes = {
-    onSearch: PropTypes.func.isRequired,
     history: PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.func,

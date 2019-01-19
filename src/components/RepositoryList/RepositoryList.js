@@ -1,31 +1,20 @@
 import React from 'react';
-import { Link, matchPath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './RepositoryList.css';
 
-export default class RepositoryList extends React.Component {
+export default class RepositoryList extends React.PureComponent {
     state = {
         repositories: [],
     }
 
     componentDidMount() {
-        console.log("match params", this.props)
         this.fetchRepositories();
     }
 
-    componentDidUpdate(prevProps) {
-        const { searchedRepository } = this.props;
-        const { repositories } = this.state;
-        if (searchedRepository !== prevProps.searchedRepository || !repositories.length) {
-            this.fetchRepositories();
-        }
-    }
-
     fetchRepositories = async () => {
-        const { searchedRepository } = this.props;
-		console.log("​RepositoryList -> fetchRepositories -> searchedRepository", searchedRepository)
-        if (!searchedRepository) return;
-        const url = `https://api.github.com/search/repositories?q=${searchedRepository}&page=1`;
+        const { search } = this.props.location; // eslint-disable-line react/destructuring-assignment
+        const url = `https://api.github.com/search/repositories${search}&page=1`;
         try {
             const response = await fetch(url, {
                 method: 'get',
@@ -71,14 +60,17 @@ export default class RepositoryList extends React.Component {
     }
 
     render() {
+        const { repositories } = this.state;
         return (
             <div className={styles.repositoryContainer}>
-                {this.createRepositoryList()}
+                {repositories.length ? this.createRepositoryList() : <div>Loading please wait...</div>}
             </div>
         );
     }
 }
 
 RepositoryList.propTypes = {
-    searchedRepository: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+        search: PropTypes.string,
+    }).isRequired,
 };
