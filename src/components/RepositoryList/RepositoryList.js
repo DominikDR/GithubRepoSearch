@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, matchPath } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './RepositoryList.css';
 
@@ -9,6 +9,7 @@ export default class RepositoryList extends React.Component {
     }
 
     componentDidMount() {
+        console.log("match params", this.props)
         this.fetchRepositories();
     }
 
@@ -22,6 +23,7 @@ export default class RepositoryList extends React.Component {
 
     fetchRepositories = async () => {
         const { searchedRepository } = this.props;
+		console.log("​RepositoryList -> fetchRepositories -> searchedRepository", searchedRepository)
         if (!searchedRepository) return;
         const url = `https://api.github.com/search/repositories?q=${searchedRepository}&page=1`;
         try {
@@ -57,7 +59,7 @@ export default class RepositoryList extends React.Component {
                 key={`${repo.login}${repo.name}`}
                 className={styles.repositoryBox}
             >
-                <Link to={`/details/${repo.login}/${repo.name}`}>
+                <Link to={{ pathname: `/details/${repo.login}/${repo.name}` }}>
                     <span className={styles.repoName}>{repo.name}</span>
                 </Link>
                 <span className={styles.owner}>Owned by {repo.login}</span>

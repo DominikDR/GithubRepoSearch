@@ -9,6 +9,7 @@ export default class Details extends React.PureComponent {
     }
 
     componentDidMount() {
+        console.log("props", this.props)
         this.fetchRepository().then((data) => {
             this.setState({
                 repository: this.reduceRepoData(data),

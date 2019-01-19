@@ -1,6 +1,7 @@
 const Express = require('express');
 const http = require('http');
 const path = require('path');
+const results = require('./routes/results');
 
 const hostname = 'localhost';
 const port = process.env.PORT || 3000;
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(Express.static('dist'));
+app.use('/', results);
 
 server.listen(port, (err) => {
     if (err) {

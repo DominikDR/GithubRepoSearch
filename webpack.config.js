@@ -11,6 +11,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve('dist'),
+        publicPath: '/',
         filename: 'main.js',
     },
     module: {
@@ -75,6 +76,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
+            publicPath: '/',
             filename: 'styles.css',
         }),
     ],

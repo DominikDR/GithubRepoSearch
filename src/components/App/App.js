@@ -17,14 +17,13 @@ export default class App extends React.Component {
     }
 
     render() {
-        const { searchedRepository } = this.state;
         return (
             <div className={styles.mainPage}>
                 <SearchBar onSearch={this.handleSearch} />
                 <Switch>
                     <Route
-                        exact path="/" // eslint-disable-line react/jsx-max-props-per-line
-                        render={() => <RepositoryList searchedRepository={searchedRepository} />}
+                        exact path="/results" // eslint-disable-line react/jsx-max-props-per-line
+                        render={props => <RepositoryList searchedRepository={props} />}
                     />
                     <Route path="/details/:owner/:repoName" component={Details} />
                 </Switch>
