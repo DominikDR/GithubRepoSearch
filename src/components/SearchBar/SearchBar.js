@@ -8,6 +8,9 @@ class SearchBar extends React.PureComponent {
     constructor(props) {
         super(props);
         this.textInput = React.createRef();
+        this.state = {
+            searchedRepo: '',
+        };
     }
 
     handleSubmit = (event) => {
@@ -18,9 +21,13 @@ class SearchBar extends React.PureComponent {
             pathname: '/results',
             search: `?q=${searchedRepo}`,
         });
+        this.setState({ searchedRepo });
     }
 
     render() {
+        const { searchedRepo } = this.state;
+		console.log("​SearchBar -> handleSubmit -> this.textInput", this.textInput)
+		console.log("​SearchBar -> render -> searchedRepo", searchedRepo)
         return (
             <div className={styles.searchBarContainer}>
                 <header className={styles.header}>
@@ -28,7 +35,13 @@ class SearchBar extends React.PureComponent {
                     <span className={styles.title}>Search for any Github repository</span>
                 </header>
                 <form className={styles.searchForm} onSubmit={this.handleSubmit}>
-                    <input type="text" className={styles.searchInput} ref={this.textInput} placeholder="Type here" />
+                    <input
+                        type="text"
+                        defaultValue={this.textInput.current ? this.textInput.current.value : searchedRepo}
+                        className={styles.searchInput}
+                        ref={this.textInput}
+                        placeholder="Type here"
+                    />
                     <button type="submit" className={styles.searchButton}>
                         <FaSearch className={styles.loupeIcon} />
                     </button>

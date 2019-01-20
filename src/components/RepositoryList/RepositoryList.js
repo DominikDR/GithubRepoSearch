@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './RepositoryList.css';
 
-export default class RepositoryList extends React.PureComponent {
+export default class RepositoryList extends React.Component {
     state = {
         repositories: [],
     }
 
     componentDidMount() {
         this.fetchRepositories();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
+            this.fetchRepositories();
+        }
     }
 
     fetchRepositories = async () => {
