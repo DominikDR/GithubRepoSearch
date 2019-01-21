@@ -24,7 +24,25 @@
 .repoName {
     text-align: center;
     text-decoration: none;
+    overflow-wrap: break-word;
     font-weight: bold;
     margin-bottom: 20px;
     cursor: pointer;
+}
+
+.owner {
+    display: flex;
+    align-items: flex-end;
+}
+.userIcon {
+    padding-right: 6px;
+}
+
+.stars {
+    display: flex;
+    align-items: flex-end;
+}
+.starIcon {
+    padding-right: 6px;
+    color: #ffa500;
 }

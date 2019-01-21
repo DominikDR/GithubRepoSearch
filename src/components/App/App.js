@@ -14,7 +14,7 @@ export default class App extends React.Component {
                 <Switch>
                     <Route
                         exact path="/results" // eslint-disable-line react/jsx-max-props-per-line
-                        render={props => <RepositoryList {...props} />}
+                        component={RepositoryList}
                     />
                     <Route path="/details/:owner/:repoName" component={Details} />
                 </Switch>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FaStar, FaUser } from 'react-icons/fa';
+
 import styles from './RepositoryList.css';
 
 export default class RepositoryList extends React.Component {
@@ -54,11 +56,17 @@ export default class RepositoryList extends React.Component {
                 key={`${repo.login}${repo.name}`}
                 className={styles.repositoryBox}
             >
-                <Link to={{ pathname: `/details/${repo.login}/${repo.name}` }}>
-                    <span className={styles.repoName}>{repo.name}</span>
+                <Link className={styles.repoName} to={{ pathname: `/details/${repo.login}/${repo.name}` }}>
+                    <span>{repo.name}</span>
                 </Link>
-                <span className={styles.owner}>Owned by {repo.login}</span>
-                <span className={styles.stars}>{repo.stars} stars</span>
+                <span className={styles.owner}>
+                    <FaUser className={styles.userIcon} />
+                    {`Owned by ${repo.login}`}
+                </span>
+                <span className={styles.stars}>
+                    <FaStar className={styles.starIcon} />
+                    {repo.stars}
+                </span>
                 <span>{repo.language}</span>
             </div>
         ));
