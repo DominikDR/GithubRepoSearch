@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { FaSearch, FaGithub } from 'react-icons/fa';
 import styles from './SearchBar.css';
 
-class SearchBar extends React.PureComponent {
+class SearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.textInput = React.createRef();

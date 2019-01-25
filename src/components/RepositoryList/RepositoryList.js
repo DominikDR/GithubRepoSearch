@@ -27,7 +27,9 @@ export default class RepositoryList extends React.Component {
             const response = await fetch(url, {
                 method: 'get',
             });
+            console.log("​RepositoryList response", response)
             const data = await response.json();
+			console.log("​RepositoryList -> data", data)
             this.setState({
                 repositories: this.reduceRepoData(data),
             });
