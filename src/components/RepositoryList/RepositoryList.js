@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { FaStar, FaUser } from 'react-icons/fa';
+import RepositoryTile from './RepositoryTile/RepositoryTile';
 
 import styles from './RepositoryList.css';
 
@@ -27,9 +26,7 @@ export default class RepositoryList extends React.Component {
             const response = await fetch(url, {
                 method: 'get',
             });
-            console.log("​RepositoryList response", response)
             const data = await response.json();
-			console.log("​RepositoryList -> data", data)
             this.setState({
                 repositories: this.reduceRepoData(data),
             });
@@ -53,26 +50,15 @@ export default class RepositoryList extends React.Component {
 
     createRepositoryList = () => {
         const { repositories } = this.state;
-        const listOfRepositories = repositories.map(repo => (
-            <div
+        return repositories.map(repo => (
+            <RepositoryTile
                 key={`${repo.login}${repo.name}`}
-                className={styles.repositoryBox}
-            >
-                <Link className={styles.repoName} to={{ pathname: `/details/${repo.login}/${repo.name}` }}>
-                    <span>{repo.name}</span>
-                </Link>
-                <span className={styles.owner}>
-                    <FaUser className={styles.userIcon} />
-                    {`Owned by ${repo.login}`}
-                </span>
-                <span className={styles.stars}>
-                    <FaStar className={styles.starIcon} />
-                    {repo.stars}
-                </span>
-                <span>{repo.language}</span>
-            </div>
+                user={repo.login}
+                repository={repo.name}
+                language={repo.language}
+                stars={repo.stars}
+            />
         ));
-        return listOfRepositories;
     }
 
     render() {

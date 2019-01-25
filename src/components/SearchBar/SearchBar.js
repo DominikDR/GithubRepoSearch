@@ -31,6 +31,7 @@ class SearchBar extends React.Component {
                 </header>
                 <form className={styles.searchForm} onSubmit={this.handleSubmit}>
                     <input
+                        key={searchedRepo}
                         type="text"
                         className={styles.searchInput}
                         defaultValue={searchedRepo}
