@@ -1,34 +1,43 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import parseLinkHeader from 'parse-link-header';
+import queryString from 'query-string';
 import RepositoryTile from './RepositoryTile/RepositoryTile';
+import Pagination from '../Pagination/Pagination';
 
 import styles from './RepositoryList.css';
 
 export default class RepositoryList extends React.Component {
     state = {
         repositories: [],
+        parsedLinkHeader: null,
     }
 
     componentDidMount() {
         this.fetchRepositories();
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props !== prevProps) {
+    componentDidUpdate({ location: prevLocation }) {
+        if (this.props.location.search !== prevLocation.search) {
             this.fetchRepositories();
         }
     }
 
     fetchRepositories = async () => {
         const { search } = this.props.location; // eslint-disable-line react/destructuring-assignment
-        const url = `https://api.github.com/search/repositories${search}&page=1`;
+        const parsedQuery = queryString.parse(search);
+        const url = `https://api.github.com/search/repositories?q=${parsedQuery.q}&page=${parsedQuery.page}`;
+		console.log('TCL: fetchRepositories -> url', url)
         try {
             const response = await fetch(url, {
                 method: 'get',
             });
+            const parsedLinkHeader = parseLinkHeader(`${response.headers.get('Link')}`);
+            console.log('​RepositoryList -> parsedLinkHeader', parsedLinkHeader);
             const data = await response.json();
             this.setState({
                 repositories: this.reduceRepoData(data),
+                parsedLinkHeader,
             });
         } catch (error) {
             console.error(error);
@@ -62,10 +71,18 @@ export default class RepositoryList extends React.Component {
     }
 
     render() {
-        const { repositories } = this.state;
+        const { repositories, parsedLinkHeader } = this.state;
         return (
             <div className={styles.repositoryContainer}>
-                {repositories.length ? this.createRepositoryList() : <div>Loading please wait...</div>}
+                {repositories.length
+                    ? <>
+                        {this.createRepositoryList()}
+                        <Pagination
+                            parsedLinkHeader={parsedLinkHeader}
+                        />
+                    </>
+                    : <div>Loading please wait...</div>
+                }
             </div>
         );
     }

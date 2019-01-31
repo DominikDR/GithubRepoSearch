@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 import { FaSearch, FaGithub } from 'react-icons/fa';
 import styles from './SearchBar.css';
 
@@ -12,17 +13,18 @@ class SearchBar extends React.Component {
 
     handleSubmit = (event) => {
         const { history } = this.props;
+		console.log('TCL: SearchBar -> handleSubmit -> history', history)
         const searchedRepo = this.textInput.current.value;
         event.preventDefault();
         history.push({
             pathname: '/results',
-            search: `q=${searchedRepo}`,
+            search: `q=${searchedRepo}&page=1`,
         });
     }
 
     render() {
         const { location: { search } } = this.props;
-        const searchedRepo = search.split('=')[1];
+        const searchedRepo = search ? queryString.parse(search).q : '';
         return (
             <div className={styles.searchBarContainer}>
                 <header className={styles.header}>
